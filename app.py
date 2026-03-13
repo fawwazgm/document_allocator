@@ -1,3 +1,17 @@
+"""Compatibility wrapper for the refactored Streamlit app.
+
+The original monolithic implementation is preserved below in `LEGACY_APP`
+so it remains in the repository for reference without being deleted.
+
+Only `run()` is active. `LEGACY_APP` is stored as a string on purpose so it
+stays easy to recover without affecting the current app behavior.
+"""
+
+from streamlit_app import run
+
+
+# Legacy copy of the original single-file app kept for reference during the refactor.
+LEGACY_APP = r'''
 import os
 import io
 import json
@@ -340,7 +354,7 @@ def process_one_pdf(uploaded_file, project_folder: Path, index: dict) -> dict:
 # UI
 
 
-# Logo is optional (don’t crash if missing)
+# Logo is optional (doesn't crash if missing)
 try:
     logo = Image.open("gmlogo.png")
     st.image(logo, width=200)
@@ -393,7 +407,7 @@ if st.button("Process Document(s)"):
     # Save index once at the end (faster + cleaner)
     save_index(project_folder, index)
 
-    status_box.success("Batch complete ✅")
+    status_box.success("Batch complete âœ…")
     st.subheader("Batch results")
     st.dataframe(results, width="stretch")
 
@@ -406,3 +420,7 @@ if st.button("Process Document(s)"):
     )
 
     st.write("**Project folder:**", str(project_folder))
+'''
+
+
+run()
