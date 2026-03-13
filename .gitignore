@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Local project/runtime data
+index.json
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
