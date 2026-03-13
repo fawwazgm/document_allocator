@@ -26,8 +26,15 @@ if not GEMINI_API_KEY:
 
 genai.configure(api_key=GEMINI_API_KEY)
 
+def resolve_base_dir() -> Path:
+    configured = os.getenv("MWS_BASE_DIR", "").strip()
+    if configured:
+        return Path(configured).expanduser()
+    return Path.cwd() / "MWS"
+
+
 # Map dropdown options to real folders on disk
-BASE_DIR = Path(r"C:\Users\fawwaz.ibrahim\Desktop\MWS")
+BASE_DIR = resolve_base_dir()
 PROJECT_FOLDERS = {
     "Project 1": BASE_DIR / "project_1",
     "Project 2": BASE_DIR / "project_2",
@@ -341,6 +348,7 @@ except Exception:
     pass
 
 st.title("MWS DocPilot")
+st.caption(f"Base storage folder: {BASE_DIR}")
 
 project_name = st.selectbox("Select Project", list(PROJECT_FOLDERS.keys()))
 uploaded_files = st.file_uploader("Upload PDF(s)", type=["pdf"], accept_multiple_files=True)

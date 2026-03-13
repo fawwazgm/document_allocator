@@ -14,6 +14,7 @@ It can:
 
 - Python 3.13
 - A `GEMINI_API_KEY` environment variable
+- Optional: an `MWS_BASE_DIR` environment variable to control where project files are stored
 
 ## Install
 
@@ -27,10 +28,18 @@ pip install -r requirements.txt
 
 ```powershell
 $env:GEMINI_API_KEY="your_api_key_here"
+$env:MWS_BASE_DIR="C:\path\to\MWS"
 streamlit run app.py
 ```
 
-## Notes
+If `MWS_BASE_DIR` is not set, the app will create and use an `MWS` folder inside the project directory.
 
-- The app currently writes to project folders under `C:\Users\fawwaz.ibrahim\Desktop\MWS`.
+## Output Structure
+
+- The app creates these folders for each project:
+  - `originals`
+  - `summaries`
+  - `problem_files`
+  - `archive`
+- Each project also keeps an `index.json` file for revision tracking.
 - The logo file is loaded from `gmlogo.png` if present.
